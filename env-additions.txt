@@ -1,0 +1,14 @@
+# Tambahkan baris ini ke file .env Anda
+
+# ADMIN CONTACT INFO
+ADMIN_CONTACT=@root
+ADMIN_WHATSAPP=+62xxx-xxxx-xxxx
+ADMIN_EMAIL=support@tokoonline.com
+
+# PAYMENT SETTINGS
+PAYMENT_PROVIDER=midtrans
+# Atau ganti ke: PAYMENT_PROVIDER=tripay
+
+# MIDTRANS SETTINGS - Pastikan QRIS diaktifkan di dashboard Midtrans
+MIDTRANS_IS_PRODUCTION=false
+MIDTRANS_QRIS_ACQUIRER=gopay
