@@ -552,9 +552,15 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+<<<<<<< HEAD
   console.log(`🚀 Server berjalan di http://34.101.189.202:${PORT}`);
   console.log(`📊 Admin Dashboard: http://34.101.189.202:${PORT}/admin`);
   console.log(`📡 Webhook: http://34.101.189.202:${PORT}/payment/webhook`);
+=======
+  console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+  console.log(`📊 Admin Dashboard: http://localhost:${PORT}/admin`);
+  console.log(`📡 Webhook: http://localhost:${PORT}/payment/webhook`);
+>>>>>>> c5406597d92f866ded9988d6dd189f3b71635b17
 });
 
 // Launch Telegram bot

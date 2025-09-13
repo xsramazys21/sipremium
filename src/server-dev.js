@@ -101,10 +101,17 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+<<<<<<< HEAD
   console.log(`🔧 Development server berjalan di http://34.101.189.202:${PORT}`);
   console.log(`📊 Admin Dashboard: http://34.101.189.202:${PORT}/admin`);
   console.log(`⚠️  Database connection disabled - Setup required`);
   console.log(`📋 Setup instructions: http://34.101.189.202:${PORT}`);
+=======
+  console.log(`🔧 Development server berjalan di http://localhost:${PORT}`);
+  console.log(`📊 Admin Dashboard: http://localhost:${PORT}/admin`);
+  console.log(`⚠️  Database connection disabled - Setup required`);
+  console.log(`📋 Setup instructions: http://localhost:${PORT}`);
+>>>>>>> c5406597d92f866ded9988d6dd189f3b71635b17
 });
 
 export default app;
