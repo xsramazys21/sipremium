@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Error - Toko Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .error-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            text-align: center;
+        }
+        .btn-fix {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            border-radius: 50px;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-fix:hover {
+            background: white;
+            color: #e74c3c;
+            transform: translateY(-2px);
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-card">
+        <div class="text-center">
+            <i class="bi bi-database-x" style="font-size: 4rem; margin-bottom: 2rem; opacity: 0.8;"></i>
+            <h1 class="h2 mb-4">❌ Koneksi Database Gagal</h1>
+            <p class="lead mb-4">Tidak dapat terhubung ke Supabase Database</p>
+            
+            <div class="alert alert-warning bg-warning text-dark" role="alert">
+                <strong>📋 Langkah Perbaikan:</strong>
+            </div>
+            
+            <div class="text-start">
+                <h5>🔧 1. Periksa file .env</h5>
+                <p>Pastikan SUPABASE_DATABASE_URL sudah benar:</p>
+                <div class="code-block">
+SUPABASE_DATABASE_URL="postgresql://postgres:<strong>PASSWORD_ASLI</strong>@db.dmaalnzqpxgtvfmxugue.supabase.co:5432/postgres"
+                </div>
+                
+                <h5>🔑 2. Reset Password Database</h5>
+                <ol>
+                    <li>Buka <a href="https://supabase.com/dashboard" target="_blank" class="text-light"><u>Supabase Dashboard</u></a></li>
+                    <li>Settings → Database → Reset password</li>
+                    <li>Update password di .env</li>
+                    <li>Restart aplikasi</li>
+                </ol>
+                
+                <h5>📊 3. Push Database Schema</h5>
+                <div class="code-block">
+npx prisma db push
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <a href="javascript:location.reload()" class="btn-fix">
+                    <i class="bi bi-arrow-clockwise me-2"></i>
+                    Coba Lagi
+                </a>
+                <a href="/" class="btn-fix">
+                    <i class="bi bi-house me-2"></i>
+                    Kembali ke Home
+                </a>
+            </div>
+            
+            <div class="mt-4 small opacity-75">
+                <i class="bi bi-info-circle me-1"></i>
+                Error Code: PRISMA_CONNECTION_ERROR
+            </div>
+        </div>
+    </div>
+</body>
+</html>

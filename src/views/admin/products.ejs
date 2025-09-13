@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Produk - Admin Toko Digital</title>
+    <!-- Tailwind CSS 4 Browser -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/admin" class="flex items-center space-x-2 text-white font-bold text-xl">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                        <span>Toko Digital - Admin</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-4">
+                    <a href="/admin" class="text-gray-300 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    
+                    <a href="/admin/products" class="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                        <span>Kelola Produk</span>
+                    </a>
+                    
+                    <a href="/admin/orders" class="text-gray-300 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>Riwayat Transaksi</span>
+                    </a>
+                    
+                    <a href="/admin/reports" class="text-gray-300 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <span>Laporan Keuangan</span>
+                    </a>
+                </div>
+
+                <!-- Logout -->
+                <div class="flex items-center">
+                    <a href="/admin/logout" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                        </svg>
+                        <span>Keluar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+
+<!-- Success Message -->
+<script>
+    // Check for success message in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    if (success === 'created') {
+        showAlert('Produk berhasil dibuat!', 'success');
+    } else if (success === 'updated') {
+        showAlert('Produk berhasil diperbarui!', 'success');
+    } else if (success === 'deleted') {
+        showAlert('Produk berhasil dihapus!', 'success');
+    }
+    
+    // Clean URL
+    if (success) {
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+    }
+</script>
+
+<!-- Header -->
+<div class="mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Kelola Produk</h1>
+            <p class="mt-2 text-sm text-gray-700">Manage semua produk digital toko Anda</p>
+        </div>
+        <div class="mt-4 sm:mt-0">
+            <a href="/admin/products/create" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Tambah Produk
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div class="flex-1">
+            <label for="search" class="sr-only">Cari produk</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input id="search" name="search" type="text" placeholder="Cari produk..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+        </div>
+        <div>
+            <select class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                <option>Semua Status</option>
+                <option>Aktif</option>
+                <option>Nonaktif</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden">
+    <div class="px-4 py-5 sm:p-6">
+        <% if (products && products.length > 0) { %>
+            <!-- Desktop Table -->
+            <div class="hidden sm:block">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produk</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stok</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dibuat</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <% products.forEach(function(product) { %>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <div class="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                                                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                <%= product.name %>
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                <%= product.slug %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        Rp <%= product.price_idr.toLocaleString('id-ID') %>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-900">
+                                            <%= product.stock || 0 %>
+                                        </span>
+                                        <% if (product.stock > 10) { %>
+                                            <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                Banyak
+                                            </span>
+                                        <% } else if (product.stock > 0) { %>
+                                            <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                Sedikit
+                                            </span>
+                                        <% } else { %>
+                                            <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                Kosong
+                                            </span>
+                                        <% } %>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <% if (product.is_active) { %>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></span>
+                                            Aktif
+                                        </span>
+                                    <% } else { %>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                            <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1.5"></span>
+                                            Nonaktif
+                                        </span>
+                                    <% } %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <%= new Date(product.created_at).toLocaleDateString('id-ID') %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="flex items-center justify-end space-x-2">
+                                        <!-- Toggle Status -->
+                                        <button onclick="toggleProductStatus(<%= product.id %>, <%= product.is_active %>)" 
+                                                class="text-blue-600 hover:text-blue-900" title="Toggle Status">
+                                            <% if (product.is_active) { %>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9V6a4 4 0 118 0v3M5 9h14a1 1 0 011 1v9a1 1 0 01-1 1H6a1 1 0 01-1-1v-9a1 1 0 011-1z"></path>
+                                                </svg>
+                                            <% } else { %>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                            <% } %>
+                                        </button>
+
+                                        <!-- Add Stock -->
+                                        <button onclick="addStock(<%= product.id %>)" 
+                                                class="text-green-600 hover:text-green-900" title="Tambah Stok">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                            </svg>
+                                        </button>
+
+                                        <!-- Edit -->
+                                        <a href="/admin/products/<%= product.id %>/edit" 
+                                           class="text-indigo-600 hover:text-indigo-900" title="Edit">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </a>
+
+                                        <!-- Delete -->
+                                        <button onclick="deleteProduct(<%= product.id %>)" 
+                                                class="text-red-600 hover:text-red-900" title="Hapus">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Cards -->
+            <div class="sm:hidden space-y-4">
+                <% products.forEach(function(product) { %>
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-sm font-medium text-gray-900 truncate">
+                                    <%= product.name %>
+                                </h3>
+                                <p class="text-sm text-gray-500 truncate">
+                                    <%= product.slug %>
+                                </p>
+                                <div class="mt-2 flex items-center space-x-4">
+                                    <span class="text-sm font-medium text-gray-900">
+                                        Rp <%= product.price_idr.toLocaleString('id-ID') %>
+                                    </span>
+                                    <span class="text-sm text-gray-500">
+                                        Stok: <%= product.stock || 0 %>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ml-4 flex-shrink-0 flex items-center space-x-2">
+                                <% if (product.is_active) { %>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Aktif
+                                    </span>
+                                <% } else { %>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        Nonaktif
+                                    </span>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center justify-end space-x-3">
+                            <button onclick="toggleProductStatus(<%= product.id %>, <%= product.is_active %>)" 
+                            class="text-sm text-blue-600 hover:text-blue-900">Toggle</button>
+                            <button onclick="addStock(<%= product.id %>)" 
+                                    class="text-sm text-green-600 hover:text-green-900">Stok</button>
+                            <a href="/admin/products/<%= product.id %>/edit" 
+                               class="text-sm text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <button onclick="deleteProduct(<%= product.id %>)" 
+                                    class="text-sm text-red-600 hover:text-red-900">Hapus</button>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+
+        <% } else { %>
+            <!-- Empty State -->
+            <div class="text-center py-12">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada produk</h3>
+                <p class="mt-1 text-sm text-gray-500">Mulai dengan menambahkan produk digital pertama Anda.</p>
+                <div class="mt-6">
+                    <a href="/admin/products/create" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Tambah Produk
+                    </a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Pagination -->
+<% if (pagination && pagination.totalPages > 1) { %>
+    <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-6">
+        <div class="flex-1 flex justify-between sm:hidden">
+            <% if (pagination.hasPrev) { %>
+                <a href="?page=<%= pagination.currentPage - 1 %>" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Previous
+                </a>
+            <% } %>
+            <% if (pagination.hasNext) { %>
+                <a href="?page=<%= pagination.currentPage + 1 %>" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Next
+                </a>
+            <% } %>
+        </div>
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+                <p class="text-sm text-gray-700">
+                    Showing page <span class="font-medium"><%= pagination.currentPage %></span> of <span class="font-medium"><%= pagination.totalPages %></span>
+                </p>
+            </div>
+            <div>
+                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                    <% if (pagination.hasPrev) { %>
+                        <a href="?page=<%= pagination.currentPage - 1 %>" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            Previous
+                        </a>
+                    <% } %>
+                    <% if (pagination.hasNext) { %>
+                        <a href="?page=<%= pagination.currentPage + 1 %>" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            Next
+                        </a>
+                    <% } %>
+                </nav>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<script>
+async function toggleProductStatus(productId, currentStatus) {
+    if (!confirm('Apakah Anda yakin ingin mengubah status produk ini?')) return;
+    
+    try {
+        console.log('Toggling product:', productId, 'current status:', currentStatus);
+        
+        const response = await fetch(`/admin/api/products/${productId}/toggle`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+        
+        const result = await response.json();
+        console.log('Toggle response:', result);
+        
+        if (result.success) {
+            showAlert(result.message || 'Status produk berhasil diubah!', 'success');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            throw new Error(result.message || 'Failed to toggle status');
+        }
+    } catch (error) {
+        console.error('Toggle error:', error);
+        showAlert('Gagal mengubah status produk: ' + error.message, 'error');
+    }
+}
+
+async function deleteProduct(productId) {
+    if (!confirmDelete('Apakah Anda yakin ingin menghapus produk ini? Aksi ini tidak dapat dibatalkan.')) return;
+    
+    try {
+        console.log('Deleting product:', productId);
+        
+        const response = await fetch(`/admin/api/products/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        const result = await response.json();
+        console.log('Delete response:', result);
+        
+        if (result.success) {
+            showAlert(result.message || 'Produk berhasil dihapus!', 'success');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            throw new Error(result.message || 'Failed to delete product');
+        }
+    } catch (error) {
+        console.error('Delete error:', error);
+        showAlert('Gagal menghapus produk: ' + error.message, 'error');
+    }
+}
+
+async function addStock(productId) {
+    const credentials = prompt('Masukkan kredensial (pisahkan dengan enter untuk multiple):');
+    if (!credentials) return;
+    
+    const credentialList = credentials.split('\n').map(c => c.trim()).filter(c => c);
+    if (credentialList.length === 0) {
+        showAlert('Tidak ada kredensial yang valid', 'warning');
+        return;
+    }
+    
+    try {
+        console.log('Adding stock for product:', productId, 'credentials:', credentialList);
+        
+        const response = await fetch(`/admin/api/products/${productId}/stock`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ credentials: credentialList })
+        });
+        
+        const result = await response.json();
+        console.log('Add stock response:', result);
+        
+        if (result.success) {
+            showAlert(result.message || `${credentialList.length} kredensial berhasil ditambahkan!`, 'success');
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            throw new Error(result.message || 'Failed to add stock');
+        }
+    } catch (error) {
+        console.error('Add stock error:', error);
+        showAlert('Gagal menambah stok: ' + error.message, 'error');
+    }
+}
+
+// Alert function
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 ${
+        type === 'success' ? 'bg-green-500 text-white' :
+        type === 'error' ? 'bg-red-500 text-white' :
+        type === 'warning' ? 'bg-yellow-500 text-black' :
+        'bg-blue-500 text-white'
+    }`;
+    alertDiv.textContent = message;
+    
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 5000);
+}
+
+function confirmDelete(message) {
+    return confirm(message || 'Apakah Anda yakin ingin menghapus item ini?');
+}
+</script>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-auto py-4">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-600">
+            <p class="text-sm">&copy; <%= new Date().getFullYear() %> Toko Digital Indonesia. Sistem manajemen toko online.</p>
+        </div>
+    </footer>
+
+    <!-- Alpine.js for interactions -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</body>
+</html>
