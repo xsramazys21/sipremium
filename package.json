@@ -30,7 +30,11 @@
     "seed": "node prisma/seed.js"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@prisma/client": "^5.17.0",
+=======
     "@prisma/client": "^6.16.1",
+>>>>>>> c5406597d92f866ded9988d6dd189f3b71635b17
     "@supabase/supabase-js": "^2.45.4",
     "axios": "^1.7.4",
     "bcrypt": "^5.1.1",
@@ -45,6 +49,10 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
+<<<<<<< HEAD
+    "prisma": "^5.17.0"
+=======
     "prisma": "^6.16.1"
+>>>>>>> c5406597d92f866ded9988d6dd189f3b71635b17
   }
 }
